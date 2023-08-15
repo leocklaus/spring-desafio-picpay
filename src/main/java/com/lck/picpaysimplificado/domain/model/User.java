@@ -47,6 +47,10 @@ public class User {
     }
 
     public void withdraw(Double amount){
+        this.balance-=amount;
+    }
+
+    public void receiveMoney(Double amount){
         this.balance+=amount;
     }
 }
