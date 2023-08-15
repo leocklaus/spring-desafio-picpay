@@ -24,7 +24,7 @@ public class TransactionService {
     private UserRepository userRepository;
 
     @Transactional
-    public Transaction createTransaction(TransactionDTO transactionDTO){
+    public TransactionDTO createTransaction(TransactionDTO transactionDTO){
         var transaction = new Transaction(transactionDTO);
         var sender = getUserByIdOrThrowsException(transactionDTO.getSenderId());
         var receiver = getUserByIdOrThrowsException(transactionDTO.getReceiverId());
@@ -42,7 +42,7 @@ public class TransactionService {
 
         transaction = transactionRepository.save(transaction);
 
-        return transaction;
+        return new TransactionDTO(transaction);
     }
 
     private User getUserByIdOrThrowsException(Long id){
