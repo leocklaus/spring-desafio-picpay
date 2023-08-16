@@ -20,6 +20,7 @@ public class User {
     private String name;
     private String password;
     private Double balance;
+    @Enumerated(EnumType.STRING)
     private UserType userType;
 
 
