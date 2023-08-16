@@ -1,7 +1,8 @@
 package com.lck.picpaysimplificado.domain.model;
 
+import com.lck.picpaysimplificado.domain.exception.SenderIsAlsoTheReceiverException;
 import com.lck.picpaysimplificado.domain.exception.UserCannotSendMoneyException;
-import com.lck.picpaysimplificado.domain.exception.UserDoesntHaveEnoughtBallanceException;
+import com.lck.picpaysimplificado.domain.exception.UserDoesntHaveEnoughBalanceException;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -33,15 +34,22 @@ public class User {
     }
 
     public boolean canSendMoney(){
-        if (this.userType == UserType.COMMON){
+        if (this.userType == UserType.BUSINESS){
             throw new UserCannotSendMoneyException();
         }
         return true;
     }
 
     public boolean canWithdraw(Double amount){
-        if (amount <= this.balance){
-            throw new UserDoesntHaveEnoughtBallanceException();
+        if (amount > this.balance){
+            throw new UserDoesntHaveEnoughBalanceException();
+        }
+        return true;
+    }
+
+    public boolean isNotTheSender(Long senderId){
+        if(this.getId() == senderId){
+            throw new SenderIsAlsoTheReceiverException();
         }
         return true;
     }
