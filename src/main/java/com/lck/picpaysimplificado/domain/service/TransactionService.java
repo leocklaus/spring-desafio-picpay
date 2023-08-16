@@ -30,7 +30,7 @@ public class TransactionService {
         var receiver = getUserByIdOrThrowsException(transactionDTO.getReceiverId());
         Double transactionAmount = transactionDTO.getAmount();
 
-        if(sender.canSendMoney() && sender.canWithdraw(transactionAmount)){
+        if(sender.canSendMoney() && sender.canWithdraw(transactionAmount) && receiver.isNotTheSender(sender.getId())){
 
             if(transactionAuthorizationServiceReturnsSuccess()){
                 sender.withdraw(transactionAmount);
