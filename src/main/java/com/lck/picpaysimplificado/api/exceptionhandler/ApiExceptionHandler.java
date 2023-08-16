@@ -1,9 +1,6 @@
 package com.lck.picpaysimplificado.api.exceptionhandler;
 
-import com.lck.picpaysimplificado.domain.exception.SenderIsAlsoTheReceiverException;
-import com.lck.picpaysimplificado.domain.exception.UserCannotSendMoneyException;
-import com.lck.picpaysimplificado.domain.exception.UserDoesntHaveEnoughBalanceException;
-import com.lck.picpaysimplificado.domain.exception.UserNotFoundException;
+import com.lck.picpaysimplificado.domain.exception.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -64,6 +61,19 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<?> handleSenderIsAlsoTheReceiverException(SenderIsAlsoTheReceiverException ex, WebRequest request){
         var status = HttpStatus.BAD_REQUEST;
         var exceptionType = ExceptionType.SENDER_IS_THE_RECEIVER;
+        String detail = ex.getMessage();
+
+        ExceptionModel exception = exceptionBuilder(status, exceptionType, detail)
+                .userMessage(ex.getMessage())
+                .build();
+
+        return handleExceptionInternal(ex, exception, new HttpHeaders(), status, request);
+    }
+
+    @ExceptionHandler(TransactionNonAuthorizedException.class)
+    public ResponseEntity<?> handleTransactionNonAuthorizedException(TransactionNonAuthorizedException ex, WebRequest request){
+        var status = HttpStatus.BAD_REQUEST;
+        var exceptionType = ExceptionType.TRANSACTION_NON_AUTHORIZED;
         String detail = ex.getMessage();
 
         ExceptionModel exception = exceptionBuilder(status, exceptionType, detail)
