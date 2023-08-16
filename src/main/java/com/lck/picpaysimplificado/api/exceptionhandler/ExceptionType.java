@@ -1,5 +1,8 @@
 package com.lck.picpaysimplificado.api.exceptionhandler;
 
+import lombok.Getter;
+
+@Getter
 public enum ExceptionType {
 
     TRANSACTION_NON_AUTHORIZED("Transação não autorizada", "/non-authorized-transaction"),
