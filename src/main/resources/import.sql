@@ -1,0 +1,2 @@
+INSERT INTO users (id, name, password, balance, user_type)  VALUES (1, 'Leonardo Klaus', '123', 200, 'COMMON');
+INSERT INTO users (id, name, password, balance, user_type) VALUES (2, 'Pedro Henrique', '456', 300, 'BUSINESS');
