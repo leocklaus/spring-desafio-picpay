@@ -12,11 +12,11 @@ import lombok.*;
 public class TransactionDTO {
 
     private Long id;
-    @NotNull
+    @NotNull(message = "O id do 'Sender' é obrigatório.")
     private Long senderId;
-    @NotNull
+    @NotNull(message = "O id do 'Receiver' é obrigatório")
     private Long receiverId;
-    @NotNull
+    @NotNull(message = "O valor é obrigatório")
     private Double amount;
 
     public TransactionDTO(Transaction transaction){
