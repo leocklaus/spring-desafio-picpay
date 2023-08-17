@@ -2,10 +2,10 @@ Resolução de um desafio com o desenvolvimento de backend com a versão "simpli
 
 Dependências utilizadas:
 
--H2 <br />
--Spring Data JPA. <br />
--Spring Web. <br />
--Bean Validation. <br />
+-H2 
+-Spring Data JPA. 
+-Spring Web. 
+-Bean Validation. 
 
 Endpoints:
 
