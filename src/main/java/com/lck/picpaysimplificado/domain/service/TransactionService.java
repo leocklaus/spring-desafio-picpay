@@ -15,6 +15,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -44,7 +45,7 @@ public class TransactionService {
         var transaction = new Transaction(transactionDTO);
         var sender = getUserByIdOrThrowsException(transactionDTO.getSenderId());
         var receiver = getUserByIdOrThrowsException(transactionDTO.getReceiverId());
-        Double transactionAmount = transactionDTO.getAmount();
+        BigDecimal transactionAmount = transactionDTO.getAmount();
 
         if(sender.canSendMoney() && sender.canWithdraw(transactionAmount) && receiver.isNotTheSender(sender.getId())){
 

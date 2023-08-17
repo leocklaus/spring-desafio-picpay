@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Getter
@@ -22,7 +23,7 @@ public class Transaction {
     private Long id;
     private Long senderId;
     private Long receiverId;
-    private Double amount;
+    private BigDecimal amount;
     @CreationTimestamp
     private LocalDateTime creationTime;
 

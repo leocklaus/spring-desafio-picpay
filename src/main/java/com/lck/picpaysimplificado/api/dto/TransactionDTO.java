@@ -5,6 +5,8 @@ import com.lck.picpaysimplificado.domain.model.User;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -17,7 +19,7 @@ public class TransactionDTO {
     @NotNull(message = "O id do 'Receiver' é obrigatório")
     private Long receiverId;
     @NotNull(message = "O valor é obrigatório")
-    private Double amount;
+    private BigDecimal amount;
 
     public TransactionDTO(Transaction transaction){
         this.id = transaction.getId();

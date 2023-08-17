@@ -6,6 +6,8 @@ import com.lck.picpaysimplificado.domain.exception.UserDoesntHaveEnoughBalanceEx
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.math.BigDecimal;
+
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Getter
 @Setter
@@ -20,12 +22,12 @@ public class User {
     private Long id;
     private String name;
     private String password;
-    private Double balance;
+    private BigDecimal balance;
     @Enumerated(EnumType.STRING)
     private UserType userType;
 
 
-    public User(Long id, String name, String password, Double balance, UserType userType) {
+    public User(Long id, String name, String password, BigDecimal balance, UserType userType) {
         this.id = id;
         this.name= name;
         this.password = password;
@@ -40,8 +42,8 @@ public class User {
         return true;
     }
 
-    public boolean canWithdraw(Double amount){
-        if (amount > this.balance){
+    public boolean canWithdraw(BigDecimal amount){
+        if (amount.compareTo(this.balance) > 0){
             throw new UserDoesntHaveEnoughBalanceException();
         }
         return true;
@@ -54,11 +56,11 @@ public class User {
         return true;
     }
 
-    public void withdraw(Double amount){
-        this.balance-=amount;
+    public void withdraw(BigDecimal amount){
+        this.balance = this.balance.subtract(amount);
     }
 
-    public void receiveMoney(Double amount){
-        this.balance+=amount;
+    public void receiveMoney(BigDecimal amount){
+        this.balance = this.balance.add(amount);
     }
 }
