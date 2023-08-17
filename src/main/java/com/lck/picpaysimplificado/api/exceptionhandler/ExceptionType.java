@@ -9,7 +9,10 @@ public enum ExceptionType {
     USER_CANNOT_SEND_MONEY("Usuário não pode enviar dinheiro", "/user-cannot-send-money"),
     USER_DOESNT_HAVE_ENOUGH_BALANCE("Saldo insuficiente", "/not-enought-balance"),
     USER_NOT_FOUND("Id inválido", "/user-not-found"),
-    SENDER_IS_THE_RECEIVER("Mesmo usuário envia e recebe", "/sender-is-also-the-receiver");
+    SENDER_IS_THE_RECEIVER("Mesmo usuário envia e recebe", "/sender-is-also-the-receiver"),
+    INVALID_DATA("Dados inválidos", "/invalid-data"),
+    SYSTEM_ERROR("Erro de sistema", "/system-error"),
+    RESOURCE_NOT_FOUND("Recurso não encontrado", "/resource-not-found");
 
 
     private String title;
