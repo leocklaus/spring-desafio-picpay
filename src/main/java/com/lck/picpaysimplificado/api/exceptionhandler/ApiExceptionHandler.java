@@ -88,6 +88,19 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
         return handleExceptionInternal(ex, exception, new HttpHeaders(), status, request);
     }
 
+    @ExceptionHandler(TransactionNotFoundException.class)
+    public ResponseEntity<?> handleTransactionNotFoundException(TransactionNotFoundException ex, WebRequest request){
+        var status = HttpStatus.NOT_FOUND;
+        var exceptionType = ExceptionType.RESOURCE_NOT_FOUND;
+        String detail = ex.getMessage();
+
+        ExceptionModel exception = exceptionBuilder(status, exceptionType, detail)
+                .userMessage(ex.getMessage())
+                .build();
+
+        return handleExceptionInternal(ex, exception, new HttpHeaders(), status, request);
+    }
+
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
 
